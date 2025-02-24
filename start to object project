@@ -1,0 +1,22 @@
+var menu = {
+  courses: {
+    appetizers: [],
+    mains: [],
+    desserts: [],
+  },
+  method: addDishToCourse(function (courseName, dishName, dishPrice) {
+    dish = {
+      name: dishName,
+      price: dishPrice,
+    },
+
+    dish.push(courseName);
+  }),
+  method2: getRandomDishFromCourse(function (courseName) {
+    var dishes = courses
+    
+  }),
+};
+
+addDishToCourse();
+getRandomDishFromCourse();

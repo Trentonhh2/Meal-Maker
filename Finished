@@ -1,0 +1,63 @@
+var menu = {
+  courses: {
+    appetizers: [],
+    mains: [],
+    desserts: [],
+  },
+  addDishToCourse: (function (courseName, dishName, dishPrice) {
+    let dish = {
+      name: dishName,
+      price: dishPrice,
+    };
+    
+    if (this.courses[courseName]) {
+      this.courses[courseName].push(dish);
+    };
+  }),
+ getRandomDishFromCourse: function(courseName) {
+  const dishes = this.courses[courseName];
+
+  if (!dishes) {
+    console.log(`No such course: ${courseName}`);
+    return null;
+  }
+
+  if (dishes.length === 0) {
+    console.log(`No dishes available in the ${courseName} course.`);
+    return null;
+  }
+
+  const randomIndex = Math.floor(Math.random() * dishes.length);
+  return dishes[randomIndex];
+},
+ generateRandomMeal: (function () {
+    const appetizers = this.getRandomDishFromCourse('appetizers');
+    const mains = this.getRandomDishFromCourse('mains');
+    const desserts = this.getRandomDishFromCourse('desserts');
+
+    const totalPrice = appetizers.price + mains.price + desserts.price
+
+    return `Your random three-course meal consists of:
+      Appetizer: ${appetizers.name} - $${appetizers.price}
+      Main Course: ${mains.name} - $${mains.price}
+      Dessert: ${desserts.name} - $${desserts.price}
+
+      Total price: $${totalPrice}`
+  })
+};
+
+
+menu.addDishToCourse('appetizers', 'bread', 3.99);
+menu.addDishToCourse('appetizers', 'wings', 7.99);
+menu.addDishToCourse('appetizers', 'nachos', 9.99);
+menu.addDishToCourse('mains', '3 tacos', 10.99);
+menu.addDishToCourse('mains', 'burger', 13.99);
+menu.addDishToCourse('mains', 'pasta', 12.99);
+menu.addDishToCourse('desserts', '3 cookies', 6.99);
+menu.addDishToCourse('desserts', 'strawberry cake', 8.99);
+menu.addDishToCourse('desserts', 'lava cake', 12.99);
+
+var meal = menu.generateRandomMeal();
+
+
+console.log(meal);
